@@ -45,11 +45,11 @@ Universitatea Politehnica București \\
 \section{Introducere}
 \subsection{Descrierea problemei}
 
-Colorarea grafurilor este o problemă centrală în teoria grafurilor \cite{1}. Ea 
+\quad Colorarea grafurilor este o problemă centrală în teoria grafurilor \cite{1}. Ea 
 constă în alegerea unui set de culori pentru nodurile unui graf, astfel încât 
 niciun nod adiacent să nu primească aceeași culoare.
 
-Problema de colorării graficului a început cu încercarea lui 
+Problema colorării graficului a început cu încercarea lui 
 Francis Guthries de a colora toate țările pe harta Angliei. 
 Acesta a presupus inițial că patru culori sunt suficiente pentru a procesa orice 
 hartă, astfel încât să nu fie asociate două țări vecine
@@ -59,54 +59,54 @@ iar această situație poate fi tradusă prin colorarea fiecărui vârf
 dintr-un graf în care marginile sale ar reprezenta vecinătatea
 dintre două regiuni \cite{3}.
 
-Colorarea grafurilor este o problemă NP-hard bine studiată cu aplicații 
+Colorarea grafurilor este o problemă de tip NP-hard bine studiată cu aplicații 
 importante în optimizarea combinatorie și într-un domeniu de cercetare activ, cu 
-multe aplicații practice \cite{4} în inginerie, cum ar fi \textit{alocația registrelor}, 
+multe aplicații practice \cite{4} în inginerie, cum ar fi \textit{alocarea registrelor}, 
 \textit{atribuirea frecvenței}, \textit{potrivirea șablonului} și \textit{programări}. 
 În consecință, colorarea grafurilor a fost subiectul unor cercetări intense \cite{5} \cite{2}.
 
 Colorarea grafurilor este asociată cu două tipuri de colorare: colorarea vârfurilor 
-și colorarea marginilor. Scopul ambelor tipuri de colorare este de a colora întregul grafic fără
+și colorarea marginilor. Scopul ambelor tipuri de colorare este de a colora întregul graf fără
 conflicte. Prin urmare, vârfurile adiacente sau muchiile adiacente trebuie
 să fie în culori diferite. Numărul celor mai mici
-posibilele culori care pot fi utilizate pentru colorarea grafului se numește 
+posibile culori care pot fi utilizate pentru colorarea grafului se numește 
 \textbf{număr cromatic}.
-Pe măsură ce numărul de vârfuri sau muchii dintr-un grafic crește,
+Pe măsură ce numărul de vârfuri sau muchii dintr-un graf crește,
 complexitatea problemei crește și ea. Din această cauză, fiecare
 algoritmul nu poate găsi numărul cromatic exact  
 și pot fi, de asemenea, diferențe în timpul lor de execuție \cite{6}. Pentru a obține 
 o soluție mai bună pentru colorarea grafurilor, mulți algoritmi euristici și meta
 euristici au fost inventați \cite{7}.
 % 
-\subsection{Secificarea algoritmilor aleși}
+\subsection{Specificarea algoritmilor aleși}
 
-\textbf{\textit{Enunț cerință:}} Fie un graf neorientat G cu N noduri și M muchii. Problema cere să asociem o culoare 
+\textbf{\textit{Cerință:}} Fie un graf neorientat G cu N noduri și M muchii. Problema cere să asociem o culoare 
 fiecărui nod, astfel încât oricare două noduri adiacente (conectate printr-o muchie directă) 
 să aibă culori diferite. Care este numărul minim de culori necesare pentru a colora 
 toate nodurile conform restricției menționate anterior? \cite{8}
 
-\subsubsection{Brute Force}
+\subsubsection{Brute Force:}
 Când încercăm să oferim o soluție la această problemă, primul instinct este de a
 folosi o abordare ”Brute Force”. Acest lucru ar duce la o soluție care ar fi 
-din punct de vedere al timpului de execuție exponentială, făcând această soluție 
+din punct de vedere al timpului de execuție exponențială, făcând această soluție 
 inutilă pentru cazuri mari. A spune că nu putem găsi un algoritm eficient 
 deoarece acesta nu există ar fi la fel ca și când am spune că problema nu are 
 nicio soluție eficientă \cite{9}.
 În prezent, există algoritmi care se ocupă să rezolve problema colorării grafurilor, 
-deși obțin un număr cromatic apropiat de graf în schimbul unui timp
+deși obțin un număr cromatic apropiat de ale grafului în schimbul unui timp
 rezonabil sau rezultate rapide care sunt suficient de utile \cite{10}.
 
-\subsubsection{Greedy Algorithm}
+\subsubsection{Greedy Algorithm:}
 Logica algoritmului ia vârfurile grafului unul câte unul, urmând o ordine 
 (care poate fi aleatorie) și atribuie prima culoare disponibilă fiecărui vârf \cite{11}. 
-Asa cum este un algoritm euristic, soluția oferită de acest algoritm poate să nu fie optimă.
+Deoarece este un algoritm euristic, soluția oferită de acesta poate să nu fie optimă.
 Cu toate acestea, o alegere corectă a ordinii vârfurilor pentru
 colorarea lor poate oferi o soluție optimă pentru orice graf. În
 practică, algoritmul Greedy produce soluții rapid practicabile, deși aceste soluții 
 pot fi “sărace” pe baza numărului de culori pe care algoritmul le cere, în comparație cu
 numărul cromatic al grafului.
 
-\subsubsection{DSatur Algorithm}
+\subsubsection{DSatur Algorithm:}
 Algoritmul DSatur (abreviere din engleză pentru “Degree Saturation”), 
 propus de Brelaz (1979), se comportă foarte asemănător cu
 algoritmul Greedy, cu excepția că, în acest caz,
@@ -117,11 +117,11 @@ caracteristicilor colorării parțiale a grafului la
 momentul în care se selectează fiecare dintre vârfuri \cite{12}. 
 În cel mai rău caz, complexitatea sa are aceeași situație ca și în
 Algoritmul Greedy, deși în practică poate fi luat în considerare
-și faptul că monitorizare saturaţiei a vârfurilor necolorate
-produce un pic în plus de complexitate. Este de reținut că
+și faptul că monitorizare saturaţiei vârfurilor necolorate
+produce o complexitate puțin mai mare. Este de reținut că
 Algoritmul DSatur este \textbf{exact} pentru grafurile bipartite \cite{13}.
 
-\subsubsection{RLF Algorithm}
+\subsubsection{RLF Algorithm:}
 Algoritmul RLF (abreviere din engleză pentru “Recursive Largest First”), propus
 de Leighton (1979), lucrează prin colorarea unui graf cu o singură culoare
 pentru fiecare iterație a algoritmului, în loc de un vârf per
@@ -135,13 +135,13 @@ soluție ce satisface toate cerințele \cite{11}.
 
 \subsection{Evaluarea soluțiilor}
 Sursele vor fi testate pe grafuri de dimensiuni diferite, de la 10 la 2 000 de noduri,
-cu un număr de muchii de la 10 la 1 000 000. Pentru fiecare graf, se va genera o
+cu un număr de muchii de la 10 la 1 000 000. Pentru fiecare graf se va genera o
 configurație aleatoare de noduri și muchii, iar apoi se va testa performanța
 algoritmilor pe aceste grafuri. Pentru fiecare algoritm, se va calcula timpul de
 execuție și numărul de culori folosite pentru a colora graful. De asemenea, se va
 calcula și numărul de noduri colorate în fiecare iterație a algoritmului, pentru a
 vedea cât de eficient este algoritmul în ceea ce privește numărul de iterații
-necesare pentru a colora graful.
+necesare colorării grafului.
 
 
 % Hot to include paragraphs
