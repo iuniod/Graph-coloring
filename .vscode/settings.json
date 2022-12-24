@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.toml": "plaintext",
+        "iosfwd": "cpp"
+    }
+}

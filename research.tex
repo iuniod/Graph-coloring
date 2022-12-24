@@ -6,6 +6,11 @@
 %
 \usepackage{hyperref}   % hyperlinks
 \usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{multirow}
+\usepackage{longtable}
+
 % Used for displaying a sample figure. If possible, figure files should
 % be included in EPS format.
 %
@@ -65,6 +70,13 @@ multe aplicații practice \cite{4} în inginerie, cum ar fi \textit{alocarea reg
 \textit{atribuirea frecvenței}, \textit{potrivirea șablonului} și \textit{programări}. 
 În consecință, colorarea grafurilor a fost subiectul unor cercetări intense \cite{5} \cite{2}.
 
+Un exemplu de o problemă de colorare a grafurilor este planificarea examenelor, unde
+fiecare examen este reprezentat de un nod și fiecare legătură dintre nodiri reprezintă
+o interzicere de a planifica examenele. Astfel, colorarea grafului reprezintă planificarea
+examenelelor, astfel încât două examene care nu pot fi planificate în același timp să fie
+colorate diferit. În acest caz, numărul minim de culori necesare pentru a colora graful
+este egal cu numărul minim de zile necesare pentru a planifica examenele. \cite{6}
+
 Colorarea grafurilor este asociată cu două tipuri de colorare: colorarea vârfurilor 
 și colorarea marginilor. Scopul ambelor tipuri de colorare este de a colora întregul graf fără
 conflicte. Prin urmare, vârfurile adiacente sau muchiile adiacente trebuie
@@ -74,16 +86,16 @@ posibile culori care pot fi utilizate pentru colorarea grafului se numește
 Pe măsură ce numărul de vârfuri sau muchii dintr-un graf crește,
 complexitatea problemei crește și ea. Din această cauză, fiecare
 algoritmul nu poate găsi numărul cromatic exact  
-și pot fi, de asemenea, diferențe în timpul lor de execuție \cite{6}. Pentru a obține 
+și pot fi, de asemenea, diferențe în timpul lor de execuție \cite{7}. Pentru a obține 
 o soluție mai bună pentru colorarea grafurilor, mulți algoritmi euristici și meta
-euristici au fost inventați \cite{7}.
+euristici au fost inventați \cite{8}.
 % 
 \subsection{Specificarea algoritmilor aleși}
 
 \textbf{\textit{Cerință:}} Fie un graf neorientat G cu N noduri și M muchii. Problema cere să asociem o culoare 
 fiecărui nod, astfel încât oricare două noduri adiacente (conectate printr-o muchie directă) 
 să aibă culori diferite. Care este numărul minim de culori necesare pentru a colora 
-toate nodurile conform restricției menționate anterior? \cite{8}
+toate nodurile conform restricției menționate anterior? \cite{9}
 
 \subsubsection{Brute Force:}
 Când încercăm să oferim o soluție la această problemă, primul instinct este de a
@@ -91,14 +103,14 @@ folosi o abordare ”Brute Force”. Acest lucru ar duce la o soluție care ar f
 din punct de vedere al timpului de execuție exponențială, făcând această soluție 
 inutilă pentru cazuri mari. A spune că nu putem găsi un algoritm eficient 
 deoarece acesta nu există ar fi la fel ca și când am spune că problema nu are 
-nicio soluție eficientă \cite{9}.
+nicio soluție eficientă \cite{10}.
 În prezent, există algoritmi care se ocupă să rezolve problema colorării grafurilor, 
 deși obțin un număr cromatic apropiat de ale grafului în schimbul unui timp
-rezonabil sau rezultate rapide care sunt suficient de utile \cite{10}.
+rezonabil sau rezultate rapide care sunt suficient de utile \cite{11}.
 
 \subsubsection{Greedy Algorithm:}
 Logica algoritmului ia vârfurile grafului unul câte unul, urmând o ordine 
-(care poate fi aleatorie) și atribuie prima culoare disponibilă fiecărui vârf \cite{11}. 
+(care poate fi aleatorie) și atribuie prima culoare disponibilă fiecărui vârf \cite{12}. 
 Deoarece este un algoritm euristic, soluția oferită de acesta poate să nu fie optimă.
 Cu toate acestea, o alegere corectă a ordinii vârfurilor pentru
 colorarea lor poate oferi o soluție optimă pentru orice graf. În
@@ -114,12 +126,12 @@ ordonarea vârfurilor este generată de algoritmul însuși.
 La fel ca în algoritmul Greedy, ordonarea a fost decisă
 înainte ca orice vârf să fie colorat, ordinea vârfurilor fiind decisă euristic pe baza
 caracteristicilor colorării parțiale a grafului la
-momentul în care se selectează fiecare dintre vârfuri \cite{12}. 
+momentul în care se selectează fiecare dintre vârfuri \cite{13}. 
 În cel mai rău caz, complexitatea sa are aceeași situație ca și în
 Algoritmul Greedy, deși în practică poate fi luat în considerare
 și faptul că monitorizare saturaţiei vârfurilor necolorate
 produce o complexitate puțin mai mare. Este de reținut că
-Algoritmul DSatur este \textbf{exact} pentru grafurile bipartite \cite{13}.
+Algoritmul DSatur este \textbf{exact} pentru grafurile bipartite \cite{14}.
 
 \subsubsection{RLF Algorithm:}
 Algoritmul RLF (abreviere din engleză pentru “Recursive Largest First”), propus
@@ -131,7 +143,7 @@ cu aceeași culoare. Acel set independent a fost eliminat
 din graf, iar subgraful rămas va continua
 în același mod, până când subgraful menționat este gol, caz în care
 toate vârfurile vor fi atribuite unei culori, producând astfel o
-soluție ce satisface toate cerințele \cite{11}.
+soluție ce satisface toate cerințele \cite{12}.
 
 \subsection{Evaluarea soluțiilor}
 Sursele vor fi testate pe grafuri de dimensiuni diferite, de la 10 la 2 000 de noduri,
@@ -143,49 +155,252 @@ calcula și numărul de noduri colorate în fiecare iterație a algoritmului, pe
 vedea cât de eficient este algoritmul în ceea ce privește numărul de iterații
 necesare colorării grafului.
 
+\section{Prezentarea soluțiilor}
+\subsection{Algoritmul Brute Force}
+Algoritmul Brute Force este un algoritm care se bazează pe forță bruta, adică
+parcurge toate posibilitățile de colorare a grafului și alege cea mai bună
+soluție. Complexitatea acestui algoritm este de $O(n^m)$, unde $n$ este numărul de noduri și $m$ este
+numărul de culori. Pentru grafuri cu un număr mare de noduri, complexitatea
+acestui algoritm este foarte mare, de aceea nu este folosit în practică. Pe de altă parte,
+algoritmul este exact, adică oferă întotdeauna o soluție optimă. Un pseudo-cod al
+algoritmului este prezentat în Pseudo codul~\ref{alg1}.
 
-% Hot to include paragraphs
-% \paragraph{Sample Heading (Fourth Level)}
-% The contribution should contain no more than four levels of
-% headings. Table~\ref{tab1} gives a summary of all heading levels.
+\begin{algorithm}
+\caption{Brute Force Algorithm}
+\label{alg1}
+\begin{algorithmic}[1]
+\Procedure{BruteForce}{$G$} \Return $List\langle int\rangle $ 
+\State $List\langle int\rangle $ $colors = new List\langle int\rangle $ \Comment{List of colors}
+\State $int$ $maxColors = 0$ \Comment{Number of colors}
+\State $int$ $maxColorsIndex = 0$ \Comment{Index of the best solution}
+\algstore{bkbreak}
+\end{algorithmic}
+\end{algorithm}
+
+\addtocounter{algorithm}{-1}
+\begin{algorithm}
+\caption{Brute Force Algorithm}
+\begin{algorithmic}[1]
+\algrestore{bkbreak}
+\State $int$ $i = 0$ \Comment{Index of the current solution}
+\State $int$ $n = G.GetNumberOfNodes()$ \Comment{Number of nodes}
+\State $int$ $m = G.GetNumberOfColors()$ \Comment{Number of colors}
+\State $int$ $max = pow(m, n)$ \Comment{Number of possible solutions}
+\While{$i < max$}
+\State $colors = G.GetColors()$
+\State $int$ $currentColors = colors.Count()$
+\If{$currentColors > maxColors$}
+\State $maxColors = currentColors$
+\State $maxColorsIndex = i$
+\EndIf
+\State $i++$
+\EndWhile
+\State $colors = G.GetColors(maxColorsIndex)$
+\State \Return $colors$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
 
 
-% Hot to include tables
-% \begin{table}
-% \caption{Table captions should be placed above the
-% tables.}\label{tab1}
-% \begin{tabular}{|l|l|l|}
-% \hline
-% Heading level &  Example & Font size and style\\
-% \hline
-% Title (centered) &  {\Large\bfseries Lecture Notes} & 14 point, bold\\
-% 1st-level heading &  {\large\bfseries 1 Introduction} & 12 point, bold\\
-% 2nd-level heading & {\bfseries 2.1 Printing Area} & 10 point, bold\\
-% 3rd-level heading & {\bfseries Run-in Heading in Bold.} Text follows & 10 point, bold\\
-% 4th-level heading & {\itshape Lowest Level Heading.} Text follows & 10 point, italic\\
-% \hline
-% \end{tabular}
-% \end{table}
+\subsection{Algoritmul Greedy}
+Algoritmul Greedy este un algoritm care alege mereu cea mai bună soluție la
+momentul curent, fără a ține cont de soluțiile viitoare.
+Un pseudo-cod al algoritmului este prezentat în
+Pseudo codul~\ref{alg2}.
 
 
-% How to include equations
-% \noindent Displayed equations are centered and set on a separate
-% line.
-% \begin{equation}
-% x + y = z
-% \end{equation}
+\begin{algorithm} 
+\caption{Greedy Algorithm}
+\label{alg2}
+\begin{algorithmic}[1]
+\Procedure{Greedy}{$G$}
+\Require{$S$ = Class Set, $V$ = Colorless vertices in random order}
+\Ensure{$S$ = $\emptyset$}
+\For{$v \in V$}
+\For{$i$ to $S.lenght$}
+\If {$NonConflitiveEdges(v \cup S_i)$}
+\State $AssignClass(v, S_i)$
+\State $Next Vertex$
+\EndIf
+\EndFor
+\If {$NotColored(v)$}
+\State $S_{i+1} = NewClass$
+\State $AssignClass(v, S_{i+1})$
+\State {Next Vertex}
+\EndIf
+\EndFor
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+În algoritmul Greedy, așa cum se poate vedea în pseudo cod,
+se folosește o permutare inițială care este generată aleatoriu și în
+care este colorat fiecare vârf, comparând în fiecare caz dacă acesta
+poate fi inclus într-o culoare fără a provoca conflicte. Pentru a analiza
+algoritmul în cel mai rău caz, vom presupune că fiecare vârf este 
+verificat cu fiecare culoare înainte de a fi colorat,
+ce ne dă un polinom care este
+\begin{equation} P(x) = n(n+1)/2. \end{equation} Polinomul
+se obţine din faptul că fiecare vârf, înainte de a fi colorat,
+trebuie să se compare cu toate culorile actuale:
+\begin{equation} P = 0 + 1 + 2 + . . . + n = n(n + 1)/2 \end{equation}
+
+În cele din urmă, vom avea o complexitate de $O(n^2)$, unde $n$ este numărul
+de noduri. Este necesar să afirmăm că algoritmul Greedy, deși calculează
+numărul cromatic aproximativ, acest lucru va depinde direct de permutarea
+inițială pe care o avem. Cu algoritmul următor vom vedea tehnici care ne
+permit să îmbunătățim modul de a alege vârfurile pentru a obține soluții
+mai bune și mai apropiate de numărul cromatic.
+
+\subsection{Algoritmul DSatur}
+Algoritmul DSatur este un algoritm care alege mereu nodul cu cea mai mare
+valoare de saturație, adică nodul care are cel mai mare număr de vecini cu
+aceeași culoare. Un pseudo-cod al algoritmului este prezentat în Pseudo codul~\ref{alg3}.
+\begin{algorithm}
+\caption{DSatur Algorithm}
+\label{alg3}
+\begin{algorithmic}[1]
+\Procedure{DSatur}{$G$}
+\Require{$S$ = Class Set, $V$ = Non-colored vertices}
+\Ensure{$S$ = $\emptyset$}
+\While {$V \neq \emptyset$}
+\State $v = MaxSaturation(V)$
+\For {$i$ to $S.lenght$}
+\If {$NonConflitiveEdges(v \cup S_i)$}
+\State $AssignClass(v, S_i)$
+\State {Next Vertex (break)}
+\EndIf
+\If {$NotColored(v)$}
+\State $S_{i+1} = NewClass$
+\State $AssignClass(v, S_{i+1})$
+\State $Remove(v, V)$
+\State {Next Vertex}
+\EndIf
+\EndFor
+\EndWhile
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+Se poate observa din pseudocod că acest algoritm este foarte asemănător cu algoritmul
+Greedy, însă puterea algoritmului DSatur constă în prioritatea dată nodurilor cu cea mai
+mare saturație. Astfel, aceste noduri mai restrânse sunt colorate înainte de restul nodurilor,
+care nu au aceste “restricții”. Complexitatea algoritmului este similară cu cea a algoritmului
+Greedy, deoarece este foarte asemănător în cod, însă are și calcule suplimentare pentru a
+obține saturația nodurilor, însă acestea nu afectează direct complexitatea totală a algoritmului,
+care este totuși $O(n^2)$. 
+
+Trebuie punctat faptul că, deși algoritmul DSatur are un performanță mai bună în general pentru
+a da soluții mai apropiate de numărul cromatic, acesta are și cazuri în care obține o soluție
+mai proastă decât algoritmul Greedy. Aceasta se poate observa în \cite{15} unde se arată că o
+distribuția neadecvată a vârfurilor este dificilă de colorat cu algoritmul DSatur.
+
+\subsection{Algoritmul RLF}
+Algoritmul RLF caută să coloreze toate vârfurile disponibile în momentul în care
+acestea nu afectează niciun conflict al aceleiași culori. De asemenea, acordă
+prioritate vârfurilor care au un grad mai mare, acordând astfel prioritate tipului
+nostru de restricție prevăzut pentru această euristică. Algoritmul RLF are
+o complexitate în cel mai rău caz mai mare decât cea a algorimului Greedy sau
+DSatur, aceasta fiind o complexitate dovedită și de Leighton (1979) - $O(n^3)$.
+Cu toate acestea acest algoritm are și o îmbunătățire a calității soluțiilor pe
+care le oferă, deşi la un cost de calcul mai mare. Mai jos se poate observa pseudo
+codul~\ref(alg4) algoritmului RLF.
+
+\begin{algorithm}
+\caption{RLF Algorithm}
+\label{alg4}
+\begin{algorithmic}[1]
+\Procedure{RLF}{$G$}
+\Require{$S$ = Class Set, $V$ = Competent vertices, $W$ = = Non-Competent vertices}
+\Ensure{$S$ = $\emptyset$, $V$ = Vertices of a given graph, $W$ = $\emptyset$}
+\While {$V \neq \emptyset$}
+\State $S_i = NewClass$
+\While {$V \neq \emptyset$}
+\State $v = MaxSaturation(V)$
+\State $AssignClass(v, S_i)$
+\State $Add($ Adjacent Vertices $(v), W)$
+\State $Remove($ Adjacent Vertices $(v), W)$
+\EndWhile
+\State $V = W$
+\State $W = \emptyset$
+\EndWhile
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
 
 
+\section{Evaluare}
+\subsection{Grafuri de test și execuția algoritmilor}
+Pentru a evalua performanța algoritmilor de colorare, am folosit grafuri de test
+generate cu ajutorul unui generator de teste de pe Github ce îl puteți accesa aici \cite{16}.
+Am generat 30 de teste prezentate în tabelul~\ref{tab1} pentru toți algoritmii
+prezentați mai sus.
 
-% Fig.~\ref{fig1}).
+\pagebreak
 
-% How to include figures
-% \begin{figure}
-% \includegraphics[width=\textwidth]{fig1.eps}
-% \caption{A figure caption is always placed below the illustration.
-% Please note that short captions are centered, while long ones are
-% justified by the macro package automatically.} \label{fig1}
-% \end{figure}
+\begin{longtable}{@{}|c|c|c|c|@{}}
+    \hline\hline
+    numărul testului & tipul grafului  & numărul de noduri (N)  & numărul de muchii (M) \\
+    \hline
+    1 & graf gol  & 887  & 0 \\
+    2 &  & 1384 & 0 \\ \hline
+    3 & graf complet & 10 & 45 \\
+    4 &  & 50 & 1225 \\
+    5 &  & 100 & 4950 \\
+    6 &  & 500 & 124750 \\
+    7 &  & 1000 & 499500 \\
+    8 &  & 2000 & 1999000 \\ \hline
+    9 & graf bipartit complet & 10 & 21 \\
+    10 &  & 50 & 504 \\
+    11 &  & 100 & 1771 \\
+    12 &  & 500 & 35275 \\
+    13 &  & 1000 & 164151 \\
+    14 &  & 2000 & 557775 \\ \hline
+    15 & arbore binar & 10 & 9 \\
+    16 &  & 50 & 49 \\
+    17 &  & 100 & 99 \\
+    18 &  & 500 & 499 \\
+    19 &  & 1000 & 999 \\
+    20 &  & 2000 & 1999 \\ \hline
+    21 & graf planar & 10 & 20 \\
+    22 &  & 50 & 100 \\
+    23 &  & 100 & 200 \\
+    24 &  & 500 & 1000 \\
+    25 &  & 1000 & 2000\\
+    26 &  & 2000 & 4000 \\ \hline
+    27 & graf cordal & 10 &  \\
+    28 &  & 50 &  \\
+    29 &  & 100 &  \\
+    30 &  & 500 &  \\
+    31 &  & 1000 & \\
+    32 &  & 2000 &  \\ \hline
+    33 & graf cu număr de muchii fixat & 1383 & 10 \\
+    34 &  & 886 & 100 \\
+    35 &  & 777 & 500 \\
+    36 &  & 915 & 1000 \\
+    37 &  & 1793 & 10000 \\
+    38 &  & 1386 & 100000 \\
+    39 &  & 1421 & 500000 \\
+    40 &  & 1763 & 1000000 \\
+    \hline
+    \caption{Grafuri de test}
+    \label{tab1}
+    \end{longtable}
+
+\subsection{Specificațiile sistemului de calcul}
+Codul a fost builduit în C++, iar fiecare dintre algoritmii prezentați mai sus au fost
+evaluați folosind un Laptop cu următoarele specificații:
+\begin{itemize}
+\item Procesor: Intel(R) Core(TM) i7-10750H CPU @2.60GHz   2.59 GHz
+\item Memorie RAM: 16 GB
+\item Sistem de operare: Windows 10 Pro 64-bit
+\item Versiunea compilatorului: GCC 9.4.0
+\item Versiunea C++: C++17
+\item Versiunea IDE: Visual Studio 2019
+\item Versiunea CMake: 3.19.2
+\end{itemize}
+
+
 
 % ------------------------------------------------------------------------------
 
@@ -219,33 +434,42 @@ Annals of Operations Research, vol. 130, 03 2002.
 Institute for Operations Research and the Management
 Sciences (INFORMS), vol. 11, no. 5.
 \bibitem{6}
+\href{http://www.ijimt.org/papers/359-D0129.pdf}{University Exam Scheduling System Using Graph
+Coloring Algorithm and RFID Technology}
+\bibitem{7}
 A. Murat and B. Nurdan, “A performance comparison of graph coloring algorithms,” 
 International Conference on Advanced Technology
 Sciences (ICAT’16), vol. 4, pp. 1–19, 12 2016
-\bibitem{7}
+\bibitem{8}
 Z. Mann, “Complexity of coloring random graphs: An experimental
 study of the hardest region,” Journal of Experimental Algorithmics,
 vol. 23, pp. 1–19, 03 2018
-\bibitem{8}
-\href{https://acs-aa-challenge.github.io/acs-aa-challenge/18-np-2-colouring/}{Enunțul problemei}
 \bibitem{9}
+\href{https://acs-aa-challenge.github.io/acs-aa-challenge/18-np-2-colouring/}{Enunțul problemei}
+\bibitem{10}
 M. Garey and D. Johnson, Computer and Intractability: A Guide to the
 Theory of NP-Completeness, 01 1979.
-\bibitem{10}
+\bibitem{11}
 D. Porumbel, J.-K. Hao, and P. Kuntz, “An evolutionary approach with
 diversity guarantee and well-informed grouping recombination for graph
 coloring,” Computers Operations Research, vol. 37, pp. 1822–1832, 10
 2010.
-\bibitem{11}
+\bibitem{12}
 L. Ouerfelli and H. Bouziri, “Greedy algorithms for dynamic graph coloring,” 2011 International Conference on Communications, Computing
 and Control Applications, CCCA 2011, 03 2011.
-\bibitem{12}
+\bibitem{13}
 \`{A}. E. Eiben, J. K. Van Der Hauw, and J. I. van Hemert, “Graph coloring
 with adaptive evolutionary algorithms,” Journal of Heuristics, vol. 4,
 no. 1, pp. 25–46, 1998.
-\bibitem{13}
+\bibitem{14}
 D. Br\`{e}laz, “New methods to color the vertices of a graph,”  Commun.
 ACM, vol. 22, pp. 251–256, 04 1979.
+\bibitem{15}
+R. Janczewski, K. Manuszewski, and K. Piwakowski, “The smallest
+hard-to-color graph for algorithm dsatur,” Discrete Mathematics, vol.
+236, pp. 151–165, 06 2001.
+\bibitem{16}
+\href{https://github.com/ifsmirnov/jngen}{GitHub - Jngen: preparing tests made simpler}
 \bibitem{}
 \href{https://en.wikipedia.org/wiki/Graph_coloring}{Graph coloring - Wikipedia}
 \bibitem{}
