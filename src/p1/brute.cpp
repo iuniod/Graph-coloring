@@ -1,7 +1,7 @@
-// C++ program for solution of M
-// Coloring problem using backtracking
-
 #include <bits/stdc++.h>
+// Number of vertices in the graph
+#define NMAX 2000
+
 using namespace std;
 
 bool isSafe(int v, map<int, vector<int>> graph, int color[], int c) {
@@ -55,4 +55,23 @@ int chNo_BruteForce(map<int, vector<int>> graph, int n) {
 	return m;
 }
 
-// This code is contributed by Shivani
+int main() {
+    map<int, vector<int>> graph;
+
+    // Read input
+    int n, m;
+    cin >> n >> m;
+    for (int i = 0; i < m; i++) {
+        int x, y;
+        cin >> x >> y;
+        graph[x].push_back(y);
+        graph[y].push_back(x);
+    }
+
+	// Function call
+	cout << chNo_BruteForce(graph, n) << endl;
+
+	return 0;
+}
+
+// https://www.geeksforgeeks.org/m-coloring-problem-backtracking-5/
