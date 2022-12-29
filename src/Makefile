@@ -29,17 +29,17 @@ run-best:
 	'make run-p3'
 
 create-statistics-p1:
-	hyperfine --warmup 3 --runs 10 --parameter-scan test 1 40 './p1.out < ../in/test{test}.in > ../out/test{test}.out1' --export-markdown statistics-p1.md 
+	hyperfine --warmup 5 --runs 10 --parameter-scan test 27 34 './p1.out < ../in/test{test}.in > ../out/test{test}.out1' --export-markdown statistics.md 
 
 create-statistics-p2:
-	hyperfine --warmup 3 --runs 10 --parameter-scan test 1 40 './p2.out < ../in/test{test}.in > ../out/test{test}.out2' --export-markdown statistics-p2.md 
+	hyperfine --warmup 5 --runs 10 --parameter-scan test 1 34 './p2.out < ../in/test{test}.in > ../out/test{test}.out2' --export-markdown statistics-p2.md 
 
 create-statistics-p3:
-	hyperfine --warmup 3 --runs 10 --parameter-scan test 1 40 './p3.out < ../in/test{test}.in > ../out/test{test}.out3' --export-markdown statistics-p3.md 
+	hyperfine --warmup 5 --runs 10 --parameter-scan test 1 34 './p3.out < ../in/test{test}.in > ../out/test{test}.out3' --export-markdown statistics-p3.md 
 
 create-statistics-p4:
-	hyperfine --warmup 3 --runs 10 --parameter-scan test 1 40 './p4.out < ../in/test{test}.in > ../out/test{test}.out4' --export-markdown statistics-p4.md 
+	hyperfine --warmup 5 --runs 10 --parameter-scan test 1 34 './p4.out < ../in/test{test}.in > ../out/test{test}.out4' --export-markdown statistics-p4.md 
 
 clean:
-	rm -f *.out *.md
+	rm -f *.out 
 
