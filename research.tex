@@ -80,9 +80,8 @@ este egal cu numărul minim de zile necesare pentru a planifica examenele. \cite
 Colorarea grafurilor este asociată cu două tipuri de colorare: colorarea vârfurilor 
 și colorarea marginilor. Scopul ambelor tipuri de colorare este de a colora întregul graf fără
 conflicte. Prin urmare, vârfurile adiacente sau muchiile adiacente trebuie
-să fie în culori diferite. Numărul celor mai mici
-posibile culori care pot fi utilizate pentru colorarea grafului se numește 
-\textbf{număr cromatic}.
+să fie în culori diferite. Numărul cel mai mic de culori necesare 
+pentru a colora graful se numește \textbf{număr cromatic}.
 Pe măsură ce numărul de vârfuri sau muchii dintr-un graf crește,
 complexitatea problemei crește și ea. Din această cauză, fiecare
 algoritmul nu poate găsi numărul cromatic exact  
@@ -99,7 +98,7 @@ toate nodurile conform restricției menționate anterior? \cite{9}
 
 \subsubsection{Brute Force:}
 Când încercăm să oferim o soluție la această problemă, primul instinct este de a
-folosi o abordare ”Brute Force”. Acest lucru ar duce la o soluție care ar fi 
+folosi o abordare ”Brute Force”. Acest lucru ar duce la o soluție, care ar fi 
 din punct de vedere al timpului de execuție exponențială, făcând această soluție 
 inutilă pentru cazuri mari. A spune că nu putem găsi un algoritm eficient 
 deoarece acesta nu există ar fi la fel ca și când am spune că problema nu are 
@@ -159,8 +158,8 @@ parcurge toate posibilitățile de colorare a grafului și alege cea mai bună
 soluție. Complexitatea acestui algoritm este de $O(n^m)$, unde $n$ este numărul de noduri și $m$ este
 numărul de culori. Pentru grafuri cu un număr mare de noduri, complexitatea
 acestui algoritm este foarte mare, de aceea nu este folosit în practică. Pe de altă parte,
-algoritmul este exact, adică oferă întotdeauna o soluție optimă. Un pseudo-cod al
-algoritmului este prezentat în Pseudo codul~\ref{alg1}.
+algoritmul este exact, adică oferă întotdeauna o soluție optimă. Un pseudocod al
+algoritmului este prezentat în Pseudocodul~\ref{alg1}.
 
 \begin{algorithm}
 \caption{Brute Force Algorithm}
@@ -202,8 +201,8 @@ algoritmului este prezentat în Pseudo codul~\ref{alg1}.
 \subsection{Algoritmul Greedy}
 Algoritmul Greedy este un algoritm care alege mereu cea mai bună soluție la
 momentul curent, fără a ține cont de soluțiile viitoare.
-Un pseudo-cod al algoritmului este prezentat în
-Pseudo codul~\ref{alg2}.
+Un pseudocod al algoritmului este prezentat în
+Pseudocodul~\ref{alg2}.
 
 
 \begin{algorithm} 
@@ -230,7 +229,7 @@ Pseudo codul~\ref{alg2}.
 \end{algorithmic}
 \end{algorithm}
 
-În algoritmul Greedy, așa cum se poate vedea în pseudo cod,
+În algoritmul Greedy, așa cum se poate vedea în pseudocod,
 se folosește o permutare inițială care este generată aleatoriu și în
 care este colorat fiecare vârf, comparând în fiecare caz dacă acesta
 poate fi inclus într-o culoare fără a provoca conflicte. Pentru a analiza
@@ -252,7 +251,7 @@ mai bune și mai apropiate de numărul cromatic.
 \subsection{Algoritmul DSatur}
 Algoritmul DSatur este un algoritm care alege mereu nodul cu cea mai mare
 valoare de saturație, adică nodul care are cel mai mare număr de vecini cu
-aceeași culoare. Un pseudo-cod al algoritmului este prezentat în Pseudo codul~\ref{alg3}.
+aceeași culoare. Un pseudocod al algoritmului este prezentat în Pseudocodul~\ref{alg3}.
 \begin{algorithm}
 \caption{DSatur Algorithm}
 \label{alg3}
@@ -287,10 +286,10 @@ Greedy, deoarece este foarte asemănător în cod, însă are și calcule suplim
 obține saturația nodurilor, însă acestea nu afectează direct complexitatea totală a algoritmului,
 care este totuși $O(n^2)$. 
 
-Trebuie punctat faptul că, deși algoritmul DSatur are un performanță mai bună în general pentru
-a da soluții mai apropiate de numărul cromatic, acesta are și cazuri în care obține o soluție
+Trebuie punctat faptul că, deși algoritmul DSatur are o performanță mai bună,
+acesta are și cazuri în care obține o soluție
 mai proastă decât algoritmul Greedy. Aceasta se poate observa în \cite{15} unde se arată că o
-distribuția neadecvată a vârfurilor este dificilă de colorat cu algoritmul DSatur.
+distribuția neadecvată a vârfurilor este dificil de colorat cu algoritmul DSatur.
 
 \subsection{Algoritmul RLF}
 Algoritmul RLF caută să coloreze toate vârfurile disponibile în momentul în care
@@ -300,8 +299,7 @@ nostru de restricție prevăzut pentru această euristică. Algoritmul RLF are
 o complexitate în cel mai rău caz mai mare decât cea a algorimului Greedy sau
 DSatur, aceasta fiind o complexitate dovedită și de Leighton (1979) - $O(n^3)$.
 Cu toate acestea acest algoritm are și o îmbunătățire a calității soluțiilor pe
-care le oferă, deşi la un cost de calcul mai mare. Mai jos se poate observa pseudo
-codul~\ref(alg4) algoritmului RLF.
+care le oferă, deşi la un cost de calcul mai mare. Mai jos se poate observa pseudocodul~\ref{alg4} algoritmului RLF.
 
 \begin{algorithm}
 \caption{RLF Algorithm}
@@ -326,7 +324,7 @@ codul~\ref(alg4) algoritmului RLF.
 \end{algorithm}
 
 \subsection{Complexități}
-Mai jos se poate observa tabelul~\ref{tabel_complexitate} care conține complexitățile algoritmilor
+Mai jos, tabelul~\ref{tabel_complexitate} conține complexitățile algoritmilor
 prezentați mai sus.
 
 \begin{table}[h]
@@ -350,7 +348,7 @@ prezentați mai sus.
 \section{Evaluare}
 \subsection{Grafuri de test și execuția algoritmilor}
 Pentru a evalua performanța algoritmilor de colorare, am folosit grafuri de test
-generate cu ajutorul unui generator de teste de pe Github ce îl puteți accesa aici \cite{16}.
+generate cu ajutorul unui generator de teste de pe Github, ce îl puteți accesa aici \cite{16}.
 Am generat 34 de teste prezentate în tabelul~\ref{tab1} pentru toți algoritmii
 prezentați mai sus.
 
@@ -411,7 +409,7 @@ cu un nod din a doua mulțime) care au proprietatea
 că pentru orice nod x din A şi orice nod y din B există muchia [x, y].
 Numărul cromatic al acestor grafuri este egal cu 2.
 
-\textbf{Arbori binari:} Acestea sunt grafuri care au proprietatea că orice nod
+\textbf{Arbori binari:} Aceștia sunt grafuri care au proprietatea că orice nod
 are cel mult 2 vecini. Numărul cromatic al acestor grafuri este egal cu 2.
 
 \textbf{Grafuri planare:} Acestea sunt grafuri care pot fi reprezentate pe o
@@ -446,7 +444,7 @@ Pentru fiecare set de date, am făcut un grafic cu timpul de rulare al fiecărui
 algoritm, iar rezultatele sunt prezentate în Figurile \ref{fig:empty_graphs} - \ref{fig:fixed_edge_number_graphs}.
 
 De asemenea, în tabelul \ref{tab:results} sunt prezentate rezultatele obținute
-pentru fiecare set de date în raport cu numărul cromatic toretic al grafurilor (
+pentru fiecare set de date în raport cu numărul cromatic teoretic al grafurilor (
     acest număr a putut fi precalculat doar pentru testr 1-26
 ).
 Pentru anumite teste care au fost prea costisitoare în timp pentru algoritmul Brute Force, am
@@ -544,11 +542,11 @@ lăsat liber câmul respectiv.
 \begin{itemize}
     \item Algoritmul Brute Force este cel mai lent, \textbf{nu} se folosește
     în practică deloc.
-    \item Algoritmul Greedy pe tote tipurile de grafuri este cel mai rapid.
+    \item Algoritmul Greedy pe toate tipurile de grafuri este cel mai rapid.
     \item Algoritmul DSatur este mai rapid decât algoritmul Brute Force, dar
     mai lent decât algoritmul Greedy.
     \item Algoritmul RLF pe grafuri goale este mai lent și decât algoritmul
-    Brute Force, pe grafuri panare și arbori binari este mai lent decât DSatur, 
+    Brute Force, pe grafuri planare și arbori binari este mai lent decât DSatur, 
     iar pe restul de grafuri este între Greedy și DSatur (aici au apărut cazuri
     care în teorie nu sunt adevărate din cauza complexității agoritmului (vezi \ref{tabel_complexitate}).
     Acest lucru se datorează faptului că nu s-au putut genera teste suficient de
@@ -559,13 +557,13 @@ lăsat liber câmul respectiv.
 În raport cu numărul cromatic, se poate observa cu ușurință faptul că algoritmul
 Brute Force este un algoritm exact, iar restul sunt aproximări (deși în teste 
 nu se observă o diferență între numărul cromatic teoretic și rezultatul de la algoritmul DSatur, dacă
-am fi avut un număr mai mare de teste cu numărul cromatic precalculat, s-ar fi apărut diferența).
-Dintre otți algoritmii euristici, algoritmul DSatur este cel mai exact.
+am fi avut un număr mai mare de teste cu numărul cromatic precalculat, ar fi apărut diferența).
+Dintre toți1 algoritmii euristici, algoritmul DSatur este cel mai exact.
 
 \section{Concluzii}
 În cadrul acestei teme am observat 4 algoritmi diferiți de colorare a grafurilor.
 
-Se poate afrma că nu există o soluție complet generală pentru colorare grafurilor.
+Se poate afirma că nu există o soluție complet generală pentru colorarea grafurilor.
 Fiecare din cele prezentate mai sus vin cu avantajele și dezavantajele lor.
 
 Algoritmul Brute Force este cel mai lent, dar este exact, algoritmul Greedy este

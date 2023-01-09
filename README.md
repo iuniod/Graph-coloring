@@ -21,9 +21,9 @@
     │   ├── p2/ - al doilea algoritm
     │   ├── p3/ - al treilea algoritm
     │   ├── p4/ - al patrulea algoritm
-    │   ├── Makefile - fișier de compilare
     │   ├── statistics-p*.py - fișiere cu statisticile pentru fiecare algoritm (regulă de compilare: make statistics-p*)
     ├── README.md - fișierul curent
+    ├── Makefile - fișier de compilare
     ├── 18.pdf - fișierul pdf cu descrierea temei
 
 ## Algoritmul cel mai eficient
